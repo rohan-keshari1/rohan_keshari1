@@ -1,0 +1,34 @@
+--Script to report the usage of AWS in a Project
+--Shell Script
+--Create .sh file
+vim [file_name].sh
+
+#!/bin/bash
+#Author: Rohan Keshari
+#Date: 23-Aug-2024
+#Version: v1.0
+#This script will report the AWS resource usage.
+#################################################
+set -x
+#list S3 buckets
+echo "print list of S3 buckets"
+aws s3 ls
+#list EC2 instances
+echo "print list of EC2 instances"
+aws ec2 describe-instances
+Or
+aws ec2 describe-instances --region us-east-1 | jq '.Reservations[].Instances[].InstanceId'
+#list AWS Lambda functions
+echo "print list of AWS Lambda functions"
+aws lambda list-functions
+#list IAM Users
+echo "print list of IAM Users"
+aws iam list-users
+
+
+
+--------------------Note---------------------------------------------------------------------------------
+chmod 777 [file_name].sh
+./[file_name].sh
+To get Output in file mode
+./[file_name].sh | more
